@@ -1,0 +1,56 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Razor_LineBot.Pages.IndexModel
+@{
+    Layout = null;
+}
+
+@{
+    ViewData["Title"] = "index";
+}
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+    </script>
+</head>
+<body>    
+    <div class="row" style="margin:10px">
+        <div class="col-12">
+            <h3>LINE BOT</h3>
+            <form method="POST">
+                @Html.AntiForgeryToken()
+                <div class="card" style="background-color:#4A708B">
+                    <div class="card-body">
+                        <h5>Channel Access Token:</h5>
+                        <textarea class="form-control" name="txbToken" rows="3">@Model.txbToken</textarea>
+                        <h5>Your User ID:</h5>
+                        <input class="form-control" name="txbUserId" value="@Model.txbUserId" />
+                        <div class="row">
+                            <div class="col-6">
+                                <h5>Message:</h5>
+                                <textarea class="form-control" name="txbMessage" rows="3">@Model.txbMessage</textarea>                                
+                                <button type="submit" asp-page-handler="SendMessage" style="font-weight:bold;background-color:#EEB422;border-radius:8px;width:130px;height:35px">Send Message</button>
+                            </div>
+                            <div class="col-6">
+                                <h5>Sticker: Package ID / Sticker ID</h5>
+                                <input class="form-control" name="txbStickerPkgId" value="@Model.txbStickerPkgId" />
+                                <input class="form-control" name="txbStickerStkId" value="@Model.txbStickerStkId" /> 
+                                <button type="submit" asp-page-handler="SendSticker" style="font-weight:bold;background-color:#EEB422;border-radius:8px;width:130px;height:35px">Send Sticker</button>
+                            </div>
+                        </div>
+                        <br>
+                        <label style="font-weight:bold">
+                            Note:  @Model.sNote
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
